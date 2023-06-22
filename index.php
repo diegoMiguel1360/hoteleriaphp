@@ -16,6 +16,7 @@
     <a href="admin/habitacion/consultar.php">Listar Habitaciones</a>
     <a href="admin/habitacion/crear.php">Crear Habitación</a>
     <a href="admin/tipo_hab/consultar.php">Tipo Habitación</a>
+    <a href="admin/estados/consultar.php">Estado Habitación</a>
     </nav>
 
 </body>

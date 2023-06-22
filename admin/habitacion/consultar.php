@@ -1,5 +1,5 @@
 <?php
-require "../../funciones.php";
+require_once "../../funciones.php";
 $resultado= consultar_hab();
 ?>
 
@@ -20,6 +20,7 @@ $resultado= consultar_hab();
     <nav>
     <a href="./crear.php">Crear Habitación</a>
     <a href="../tipo_hab/consultar.php">Tipo Habitación</a>
+    <a href="../estados/consultar.php">Estado Habitación</a>
     <input type="submit" name="" value="Disponibles" id="Disponibles" onclick = "funcion()">
     <input type="submit" name="" value="Ocupadas" id="Ocupadas" onclick = "funcion()">
     <input type="submit" name="" value="Reservadas" id="Reservadas" onclick = "funcion()">
@@ -41,7 +42,7 @@ $resultado= consultar_hab();
     while ($habitacion = mysqli_fetch_array($resultado)) {
         echo '<tr>
         <td>'.$habitacion['hab_numero'] . '</td>
-        <td>'.$habitacion['estado'] . '</td>
+        <td>'.$habitacion['hab_estado'] . '</td>
         <td>'.$habitacion['tipo_hab_id'] . '</td>
         <td>'.$habitacion['hab_tarifa'] . '</td>
         <td>'.$habitacion['hab_capacidad'] . '</td>

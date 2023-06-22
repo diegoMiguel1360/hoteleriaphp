@@ -15,13 +15,16 @@
     $errores =  [];
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $hab_numero = $_POST['hab_numero'];
-        $estado = $_POST['estado'];
+        $estado = $_POST['hab_estado'];
         $tipo_hab_id = $_POST['tipo_hab_id'];
         $hab_tarifa = $_POST['hab_tarifa'];
         $hab_capacidad = $_POST['hab_capacidad'];
         $imagen = $_POST['imagen'];
             if(!$hab_numero){
                 $errores[] = 'El número de habitacion es obligatorio';
+            }
+            if(!$estado){
+                $errores[] = 'El estado de habitacion es obligatorio';
             }
             if(!$tipo_hab_id){
                 $errores[] = 'El tipo de habitacion es obligatorio';
@@ -36,8 +39,8 @@
                 $errores[] = 'La imagen es obligatoria';
             }
             if(empty($errores)){
-                $sql = "INSERT INTO habitacion (hab_numero, estado, tipo_hab_id, hab_tarifa, hab_capacidad, imagen) 
-                VALUES ('$hab_numero', '1', '$tipo_hab_id', '$hab_tarifa', '$hab_capacidad', '$imagen')" ;
+                $sql = "INSERT INTO habitacion (hab_numero, hab_estado, tipo_hab_id, hab_tarifa, hab_capacidad, imagen) 
+                VALUES ('$hab_numero', '$estado', '$tipo_hab_id', '$hab_tarifa', '$hab_capacidad', '$imagen')" ;
                 echo $sql;
                 $resultado = mysqli_query($bd, $sql);
                 if($resultado){

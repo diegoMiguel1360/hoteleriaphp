@@ -11,7 +11,7 @@
 
 <?php
 function conectar_bd(){
-    $bd = mysqli_connect('localhost', 'root', '', 'hoteleria');
+    $bd = mysqli_connect('localhost', 'root', '', 'kratoshotel');
 
     if(!$bd){
         echo '<p>No se pudo conectar a la base de datos</p>';
