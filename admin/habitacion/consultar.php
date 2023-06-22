@@ -46,8 +46,8 @@ $resultado= consultar_hab();
         <td>'.$habitacion['hab_tarifa'] . '</td>
         <td>'.$habitacion['hab_capacidad'] . '</td>
         <td>'.$habitacion['imagen'] . '</td>
-        <td><a href="admin/habitacion/actualizar.php">Actualizar</a>
-        <a href="admin/habitacion/eliminar.php">Eliminar</a></td>
+        <td><a href="actualizar.php?codigo='.$habitacion['hab_numero'].'">Actualizar</a>
+        <a href="eliminar.php?codigo='.$habitacion['hab_numero'].'">Eliminar</a></td>
         </tr>';
     }
     ?>
