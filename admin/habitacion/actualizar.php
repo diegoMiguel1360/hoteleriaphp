@@ -10,21 +10,24 @@
 
 <?php
     require "../../funciones.php";
-    $actualiza_hab = $_GET["codigo"];
-    $actualiza_hab = filter_var($actualiza_hab, FILTER_VALIDATE_INT);
-    if(!$actualiza_hab){
+    $codigo_hab = $_GET["codigo"];
+    $codigo_hab = filter_var($codigo_hab, FILTER_VALIDATE_INT);
+    if(!$codigo_hab){
         header("consultar.php");
     }
 
+    $estadox= consultar_estado(); 
     $tipo= consultar_tipo(); 
     $bd = conectar_bd();
-    $consulta_habitacion = "SELECT * FROM habitacion WHERE hab_numero=$actualiza_hab";
+    $consulta_habitacion = "SELECT * FROM habitacion WHERE hab_numero=$codigo_hab";
     $resultadox = mysqli_query($bd, $consulta_habitacion);
     $habi = mysqli_fetch_assoc($resultadox);
     
     $num = $habi['hab_numero'];
-    $est = $habi['estado'];
+    $est = $habi['hab_estado'];
+    echo $est;
     $tipox = $habi['tipo_hab_id'];
+    echo $tipox;
     $tarifa = $habi['hab_tarifa'];
     $capacidad = $habi['hab_capacidad'];
     $img = $habi['imagen'];
@@ -32,12 +35,16 @@
     $errores =  [];
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $hab_numero = $_POST['hab_numero'];
+        $hab_estado = $_POST['hab_estado'];
         $tipo_hab_id = $_POST['tipo_hab_id'];
         $hab_tarifa = $_POST['hab_tarifa'];
         $hab_capacidad = $_POST['hab_capacidad'];
         $imagen = $_POST['imagen'];
             if(!$hab_numero){
                 $errores[] = 'El número de habitacion es obligatorio';
+            }
+            if(!$hab_estado){
+                $errores[] = 'El estado de habitacion es obligatorio';
             }
             if(!$tipo_hab_id){
                 $errores[] = 'El tipo de habitacion es obligatorio';
@@ -52,8 +59,8 @@
                 $errores[] = 'La imagen es obligatoria';
             }
             if(empty($errores)){
-                $sql = "UPDATE habitacion SET tipo_hab_id = '$tipo_hab_id', hab_tarifa = '$hab_tarifa', hab_capacidad = '$hab_capacidad', imagen = '$imagen' 
-                WHERE hab_numero = '$actualiza_hab'";
+                $sql = "UPDATE habitacion SET hab_estado='$hab_estado', tipo_hab_id = '$tipo_hab_id', hab_tarifa = '$hab_tarifa', hab_capacidad = '$hab_capacidad', imagen = '$imagen' 
+                WHERE hab_numero = '$codigo_hab'";
                 echo $sql;
                 $resultado = mysqli_query($bd, $sql);
                 if($resultado){
@@ -75,6 +82,7 @@
     </div></center>
     <nav>
     <a href="../tipo_hab/consultar.php">Tipo Habitación</a>
+    <a href="../estados/consultar.php">Estado Habitación</a>
     <a href="consultar.php">Regresar</a>
     </nav>
 <div>
@@ -87,8 +95,19 @@
         <label class="eltext" for="hab_numero">No. Habitación</label><br>
         <input class='bloqu' type="text" id="hab_numero" name="hab_numero" value="<?php echo $num ?>"><br>
 
+        <label class="eltext" for="hab_estado">estado de habitación</label><br>
+        <select name="hab_estado" id="hab_estado" value="dsgdfg">
+            <?php
+            while ($estadx = mysqli_fetch_array($estadox)):
+                $est = $estadx['est_id'];
+                $nomest = $estadx['est_nombre'];
+                echo "<option value=$est>$nomest</option>";
+            endwhile;
+            ?>
+        </select><br>
+
         <label class="eltext" for="tipo_hab_id">tipo de habitación</label><br>
-        <select name="tipo_hab_id" id="tipo_hab_id" name="tipo_hab_id" value="<?php echo $tipox ?>">
+        <select name="tipo_hab_id" id="tipo_hab_id" value="dfgdf">
             <?php
             while ($hab = mysqli_fetch_array($tipo)):
                 $nom = $hab['tipo_hab'];

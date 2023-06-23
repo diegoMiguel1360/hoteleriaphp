@@ -10,6 +10,7 @@
 
 <?php
     require "../../funciones.php";
+    $estadox= consultar_estado();
     $tipo= consultar_tipo(); 
     $bd = conectar_bd();
     $errores =  [];
@@ -62,6 +63,7 @@
     </div></center>
     <nav>
     <a href="../tipo_hab/consultar.php">Tipo Habitación</a>
+    <a href="../estados/consultar.php">Estados Habitación</a>
     <a href="../../index.php">Regresar</a>
     </nav>
 <div>
@@ -74,8 +76,20 @@
         <label class="eltext" for="hab_numero">No. Habitación</label><br>
         <input class='bloqu' type="text" id="hab_numero" name="hab_numero"><br>
 
+        <label class="eltext" for="hab_estado">estado de habitación</label><br>
+        <select name="hab_estado" id="hab_estado">
+            <option selected="true" disabled="disabled"></option>
+            <?php
+            while ($estadx = mysqli_fetch_array($estadox)):
+                $est = $estadx['est_id'];
+                $nomest = $estadx['est_nombre'];
+                echo "<option value=$est>$nomest</option>";
+            endwhile;
+            ?>
+        </select><br>
+
         <label class="eltext" for="tipo_hab_id">tipo de habitación</label><br>
-        <select name="tipo_hab_id" id="tipo_hab_id" name="tipo_hab_id">
+        <select name="tipo_hab_id" id="tipo_hab_id">
             <option selected="true" disabled="disabled"></option>
             <?php
             while ($hab = mysqli_fetch_array($tipo)):

@@ -21,9 +21,6 @@ $resultado= consultar_hab();
     <a href="./crear.php">Crear Habitación</a>
     <a href="../tipo_hab/consultar.php">Tipo Habitación</a>
     <a href="../estados/consultar.php">Estado Habitación</a>
-    <input type="submit" name="" value="Disponibles" id="Disponibles" onclick = "funcion()">
-    <input type="submit" name="" value="Ocupadas" id="Ocupadas" onclick = "funcion()">
-    <input type="submit" name="" value="Reservadas" id="Reservadas" onclick = "funcion()">
     <a href="../../index.php">Regresar</a>
     </nav>
 

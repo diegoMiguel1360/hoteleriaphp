@@ -17,7 +17,7 @@ function conectar_bd(){
         echo '<p>No se pudo conectar a la base de datos</p>';
         exit;
     }else{
-        echo 'Conexión exitosa';
+        echo '';
     }
     return $bd;
 }
