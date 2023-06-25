@@ -20,6 +20,7 @@ $resultado= consultar_tipo();
     <nav>
     <a href="crear.php">Crear tipo habitación</a>
     <a href="../habitacion/consultar.php">Habitaciones</a>
+    <a href="../estados/consultar.php">Estado Habitación</a>
     <a href="../../index.php">Regresar</a>
     </nav>
 
@@ -35,8 +36,8 @@ $resultado= consultar_tipo();
         echo '<tr>
         <td>'.$tipo['tipo_hab_id'] . '</td>
         <td>'.$tipo['tipo_hab'] . '</td>
-        <td><a href="admin/habitacion/actualizar.php">Actualizar</a>
-        <a href="admin/habitacion/eliminar.php">Eliminar</a></td>
+        <td><a href="actualizar.php?codigo='.$tipo['tipo_hab_id'].'">Actualizar</a>
+        <a href="eliminar.php?codigo='.$tipo['tipo_hab_id'].'">Eliminar</a></td>
         </tr>';
     }
     ?>

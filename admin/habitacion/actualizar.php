@@ -19,15 +19,16 @@
     $estadox= consultar_estado(); 
     $tipo= consultar_tipo(); 
     $bd = conectar_bd();
-    $consulta_habitacion = "SELECT * FROM habitacion WHERE hab_numero=$codigo_hab";
+    $consulta_habitacion = "SELECT * FROM habitacion
+                            INNER JOIN estados ON estados.est_id = habitacion.hab_estado
+                            INNER JOIN tipo_habitacion ON tipo_habitacion.tipo_hab_id = habitacion.tipo_hab_id 
+                            WHERE hab_numero=$codigo_hab";
     $resultadox = mysqli_query($bd, $consulta_habitacion);
     $habi = mysqli_fetch_assoc($resultadox);
     
     $num = $habi['hab_numero'];
     $est = $habi['hab_estado'];
-    echo $est;
     $tipox = $habi['tipo_hab_id'];
-    echo $tipox;
     $tarifa = $habi['hab_tarifa'];
     $capacidad = $habi['hab_capacidad'];
     $img = $habi['imagen'];
@@ -93,10 +94,11 @@
 <form class="formulario" method="POST">
 
         <label class="eltext" for="hab_numero">No. Habitación</label><br>
-        <input class='bloqu' type="text" id="hab_numero" name="hab_numero" value="<?php echo $num ?>"><br>
+        <input class='bloqu' type="text" id="hab_numero" name="hab_numero" readonly=true value="<?php echo $num ?>"><br>
 
         <label class="eltext" for="hab_estado">estado de habitación</label><br>
-        <select name="hab_estado" id="hab_estado" value="dsgdfg">
+        <select name="hab_estado" id="hab_estado">
+            <option value="<?php echo $est?>"><?php echo $habi['est_nombre']?></option>
             <?php
             while ($estadx = mysqli_fetch_array($estadox)):
                 $est = $estadx['est_id'];
@@ -107,7 +109,8 @@
         </select><br>
 
         <label class="eltext" for="tipo_hab_id">tipo de habitación</label><br>
-        <select name="tipo_hab_id" id="tipo_hab_id" value="dfgdf">
+        <select name="tipo_hab_id" id="tipo_hab_id">
+        <option value="<?php echo $tipox?>"><?php echo $habi['tipo_hab']?></option>
             <?php
             while ($hab = mysqli_fetch_array($tipo)):
                 $nom = $hab['tipo_hab'];
